@@ -9,9 +9,6 @@ import pywt
 # http://mziccard.me/2015/06/12/beats-detection-algorithms-2/
 # https://github.com/scaperot/the-BPM-detector-python/blob/master/bpm_detection/bpm_detection.py
 
-# data:
-# http://drumslive.com/dir/free-loops/
-
 def wavLoad(fname):
     wav = wave.open(fname, 'r')
     params = (nchannels, sampwidth, _, nframes, _, _) = wav.getparams()
@@ -21,36 +18,31 @@ def wavLoad(fname):
     return (params, struct.unpack_from(fmt, frames))
 
 
-def estimateBPM(fname):
-    ((nchannels, _, framerate, total_frames, _, _), wav_data) = wavLoad(fname)
-    print('# of channels {}'.format(nchannels))
-    print('framerate {}'.format(framerate))
-
+def decomposeChannels(nchannels, wav_data):
     left, right = [], []
     if nchannels == 2:
         left = wav_data[::2]
         right = wav_data[1::2]
     else:
         left = right = wav_data
+    return (left, right)
 
-    window_size = framerate * 3
-    levels = 4
 
-    bpms = []
+def estimateBPM(fname, window_length=3, levels=4):
+    ((nchannels, _, framerate, total_frames, _, _), wav_data) = wavLoad(fname)
+    print('# of channels {}'.format(nchannels))
+    print('framerate {}'.format(framerate))
+
+    left, right = decomposeChannels(nchannels, wav_data)
+    window_size = framerate * window_length
+
     print('Computing left channel...')
-    for i in xrange(window_size, len(left), window_size):
-        bpm = computeWindowBPM(left[i - window_size: i], framerate, levels)
-        print(bpm)
-        bpms.append(bpm)
-
-    print('Computing right channel...')
-    for i in xrange(window_size, len(right), window_size):
-        bpm = computeWindowBPM(right[i - window_size: i], framerate, levels)
-        print(bpm)
-        bpms.append(bpm)
+    bpms = [computeWindowBPM(left[(i - window_size):i], framerate, levels) \
+                for i in range(window_size, len(left), window_size)]
 
     estimated_bpm = np.median(np.array(bpms))
     return estimated_bpm
+
 
 def computeWindowBPM(data, framerate, levels):
     # 0) Extract DWTs
@@ -66,24 +58,28 @@ def computeWindowBPM(data, framerate, levels):
     dCs = [signal.lfilter([0.01], [1 -0.99], dC) for dC in dCs]
 
     # 2) FWR
-    dCs = [[abs(datum) for datum in dC] for dC in dCs]
+    dCs = [abs(dC) for dC in dCs]
 
-    # 3) DOWN
-    # note the decimation order is reveresed in reference, look into this
-    dCs = [dC[::2**i] for i, dC in enumerate(dCs)]
+    # 3) DOWN - goal is to equivocate the length of each set of data
+    # each step of the dwt cuts the dataset in half, this downsampling adjusts the dataset size
+    dCs = [dC[::2**(levels - 1 - i)] for i, dC in enumerate(dCs)]
 
     # 4) NORM
     for i, dC in enumerate(dCs):
         mean = np.mean(dC)
-        dCs[i] = [datum - mean for datum in dC]
+        dCs[i] = dC - mean
 
     # 5) ACRL
-    # note implementation details are vague, look into this
     # experiment with adding approximate data
-    dC_sum = [0 for i in range(dC_minlen)]
-    for i in reversed(range(levels)):
-        dC_sum += dCs[i][:dC_minlen]                    # experiment with and without using minlen
+    dC_sum = np.zeros([dC_minlen])
+    for dC in dCs:
+        dC_sum += dC[:dC_minlen]    # minlen accounts for the slight adjustments made by dwt
     correl = np.correlate(dC_sum, dC_sum, 'full')
+
+    # FOR DEBUG
+    # import matplotlib.pyplot as plt
+    # plt.plot(correl)
+    # plt.show()
 
     # Extract peak
     correl_midpoint = len(correl)/2
@@ -92,10 +88,11 @@ def computeWindowBPM(data, framerate, levels):
 
     # Calculate BPM
     bpm = 60. / peak_idx * (framerate/max_decimation)   # do the math here
+    print(bpm)
     return bpm
 
 
-# simple peak detection
+# simple peak detection, understand this
 def detect_peak(data):
     max_val = np.amax(abs(data))
     peak_ndx = np.where(data==max_val)
