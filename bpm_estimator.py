@@ -145,7 +145,7 @@ def computeWindowBPM(data, framerate, levels):
 
 if __name__ == '__main__':
     """
-    That should be it just about it! Let's try it out!
+    That should be just about it! Let's try it out!
     One optimization that I've noticed in other implementations
     """
     import argparse
