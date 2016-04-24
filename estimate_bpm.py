@@ -72,10 +72,10 @@ def extractDWTCoefficients(data, deg=4):
     Before we get into computing the window bpm, let's figure out exactly what the DWT is.
     Those familiar with signal processing will know the Fourier Transform, which decomposes a
     signal into its constituents. On a high level, the DWT does a similar decomposition, but only
-    into high-frequency and low-frequency components. These are stored in the
-    detail coefficients (dC) and approximation coefficients (aC) respectively. By performing cascading
-    DWTs on the approximation coefficients, we can recover finer frequency resolution, which is we want for a
-    good frequency decomposition: https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Cascading_and_filter_banks
+    into high-frequency and low-frequency components, while maintaining when these frequencies occur.
+    These are stored in the detail coefficients (dC) and approximation coefficients (aC) respectively.
+    By performing cascading DWTs on the approximation coefficients, we can recover finer frequency resolution, which is
+    we want for a good frequency decomposition: https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Cascading_and_filter_banks
     """
     dC_list, aC_list = [], []
     for i in range(deg):
@@ -107,7 +107,7 @@ def computeWindowBPM(data, framerate, levels):
     """
 
     # 0) Extract DWTs
-    dCs, aCs = extractDWTCoefficients(data, levels)                             # We're going to need the high frequency decomposition (dC) and the first low frequency decomposition (aC).
+    dCs, aCs = extractDWTCoefficients(data, levels)                             # We're going to need the high frequency decomposition (dCs)
 
     # 0.5 ) Extract relevant variables
     max_downsample = 2**(levels - 1)                                            # This will be useful later for downsampling and calculating the final bpm
