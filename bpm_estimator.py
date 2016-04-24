@@ -47,7 +47,7 @@ def decomposeChannels(nchannels, wav_data):
     return channels
 
 
-def estimateBPM(fname, window_length=3, levels=4):
+def estimateBPM(fname, window_length=3, levels=5):
     """
     Here is where we actually determine the estimated bpm for the entire song. For windows of
     length ```window_length``` in seconds, we estimate the bpm of that window using
@@ -90,7 +90,7 @@ def detectPeak(data):
     """
     All we're doing here is determining the index of the largest magnitude datum
     in the supplied data. This is needed later for determining the index of beats
-    in a window. (Full disclosure, I just copied this verbatim from Scaperot)
+    in a window. (Full disclosure, I just copied this part verbatim from Scaperot)
     """
     max_val = np.amax(abs(data))
     peak_ndx = np.where(data==max_val)
@@ -159,4 +159,3 @@ if __name__ == '__main__':
     print('Estimating BPM of {}'.format(args.filename))
     estimated_bpm = estimateBPM(args.filename)
     print('Estimated BPM: {}'.format(estimated_bpm))
-

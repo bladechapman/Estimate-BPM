@@ -1,2 +1,4 @@
 data/*
 .DS_Store
+*.pyc
+control.py
