@@ -151,8 +151,8 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--filename',
-        default='./data/gold_dust_short.wav',
-        help='wav file to be analyzed (defaults to ./data/gold_dust_short.wav)')
+        required=True,
+        help='wav file to be analyzed')
     args = parser.parse_args()
 
     print('Estimating BPM of {}'.format(args.filename))

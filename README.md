@@ -7,8 +7,7 @@ usage: bpm_estimator.py [-h] [--filename FILENAME]
 
 optional arguments:
   -h, --help           show this help message and exit
-  --filename FILENAME  wav file to be analyzed (defaults to
-                       ./data/gold_dust_short.wav)
+  --filename FILENAME  wav file to be analyzed
 ``` 
 
 # Why?
@@ -20,6 +19,3 @@ Why did I do this? As you may have noticed from the references below, there are 
 [Marco Ziccardi's Blog & Scala Implementation](http://mziccard.me/2015/06/12/beats-detection-algorithms-2/)<br>
 [Scaperot's own Python Implementation](https://github.com/scaperot/the-BPM-detector-python/blob/master/bpm_detection/bpm_detection.py)<br>
 
-# Sources:
-[Gold Dust (Flux Pavillion Remix) - DJ Fresh](https://pro.beatport.com/track/gold-dust-flux-pavilion-remix/1556118)<br>
-[Daybreak - OVERWERK](https://pro.beatport.com/track/daybreak-original-mix/4005260)<br>
