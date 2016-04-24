@@ -47,7 +47,7 @@ def decomposeChannels(nchannels, wav_data):
     return channels
 
 
-def estimateBPM(fname, window_length=4, levels=5):
+def estimateBPM(fname, window_length=3, levels=5):
     """
     Here is where we actually determine the estimated bpm for the entire song. For windows of
     length ```window_length``` in seconds, we estimate the bpm of that window using
@@ -149,11 +149,10 @@ if __name__ == '__main__':
     One optimization that I've noticed in other implementations
     """
     import argparse
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--filename',
-        required=True,
-        help='wav file to be analyzed')
+        default='./data/gold_dust_short.wav',
+        help='wav file to be analyzed (defaults to ./data/gold_dust_short.wav)')
     args = parser.parse_args()
 
     print('Estimating BPM of {}'.format(args.filename))

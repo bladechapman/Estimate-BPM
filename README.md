@@ -3,11 +3,12 @@ A quick script to estimate the tempo of a wav file in beats per minute (bpm). Th
 
 # Usage
 ```
-usage: bpm_estimator.py [-h] --filename FILENAME
+usage: bpm_estimator.py [-h] [--filename FILENAME]
 
 optional arguments:
   -h, --help           show this help message and exit
-  --filename FILENAME  wav file to be analyzed
+  --filename FILENAME  wav file to be analyzed (defaults to
+                       ./data/gold_dust_short.wav)
 ``` 
 
 # Why?
@@ -18,4 +19,4 @@ Why did I do this? As you may have noticed from the references below, there are 
 mta_aadwt.pdf)<br>
 [Discrete Wavelet Transform Info](https://en.wikipedia.org/wiki/Discrete_wavelet_transform)<br>
 [Marco Ziccardi's Blog & Scala Implementation](http://mziccard.me/2015/06/12/beats-detection-algorithms-2/)<br>
-[Scaprot's own Python Implementation](https://github.com/scaperot/the-BPM-detector-python/blob/master/bpm_detection/bpm_detection.py)<br>
+[Scaperot's own Python Implementation](https://github.com/scaperot/the-BPM-detector-python/blob/master/bpm_detection/bpm_detection.py)<br>
