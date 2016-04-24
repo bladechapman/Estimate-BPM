@@ -74,8 +74,9 @@ def extractDWTCoefficients(data, deg=4):
     signal into its constituents. On a high level, the DWT does a similar decomposition, but only
     into high-frequency and low-frequency components, while maintaining when these frequencies occur.
     These are stored in the detail coefficients (dC) and approximation coefficients (aC) respectively.
-    By performing cascading DWTs on the approximation coefficients, we can recover finer frequency resolution, which is
-    we want for a good frequency decomposition: https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Cascading_and_filter_banks
+    By performing cascading DWTs on the approximation coefficients, we can recover finer frequency resolution,
+    which is what we want for a good frequency decomposition:
+    https://en.wikipedia.org/wiki/Discrete_wavelet_transform#Cascading_and_filter_banks
     """
     dC_list, aC_list = [], []
     for i in range(deg):
