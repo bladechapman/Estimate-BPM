@@ -47,7 +47,7 @@ def decomposeChannels(nchannels, wav_data):
     return channels
 
 
-def estimateBPM(fname, window_length=3, levels=5):
+def estimateBPM(fname, window_length=4, levels=5):
     """
     Here is where we actually determine the estimated bpm for the entire song. For windows of
     length ```window_length``` in seconds, we estimate the bpm of that window using
