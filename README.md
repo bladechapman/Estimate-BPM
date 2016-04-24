@@ -20,3 +20,7 @@ mta_aadwt.pdf)<br>
 [Discrete Wavelet Transform Info](https://en.wikipedia.org/wiki/Discrete_wavelet_transform)<br>
 [Marco Ziccardi's Blog & Scala Implementation](http://mziccard.me/2015/06/12/beats-detection-algorithms-2/)<br>
 [Scaperot's own Python Implementation](https://github.com/scaperot/the-BPM-detector-python/blob/master/bpm_detection/bpm_detection.py)<br>
+
+# Sources:
+[Gold Dust (Flux Pavillion Remix) - DJ Fresh](https://pro.beatport.com/track/gold-dust-flux-pavilion-remix/1556118)
+[Daybreak - OVERWERK](https://pro.beatport.com/track/daybreak-original-mix/4005260)
