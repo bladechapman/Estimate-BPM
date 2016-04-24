@@ -15,7 +15,7 @@ Why did I do this? As you may have noticed from the references below, there are 
 
 # References:
 [Audio Analysis using the Discrete Wavelet Transform](http://soundlab.cs.princeton.edu/publications/2001_a
-mta_aadwt.pdf)
-[Discrete Wavelet Transform Info](https://en.wikipedia.org/wiki/Discrete_wavelet_transform)
-[Marco Ziccardi's Blog & Scala Implementation](http://mziccard.me/2015/06/12/beats-detection-algorithms-2/)
-[Scaprot's own Python Implementation](https://github.com/scaperot/the-BPM-detector-python/blob/master/bpm_detection/bpm_detection.py)
+mta_aadwt.pdf)<br>
+[Discrete Wavelet Transform Info](https://en.wikipedia.org/wiki/Discrete_wavelet_transform)<br>
+[Marco Ziccardi's Blog & Scala Implementation](http://mziccard.me/2015/06/12/beats-detection-algorithms-2/)<br>
+[Scaprot's own Python Implementation](https://github.com/scaperot/the-BPM-detector-python/blob/master/bpm_detection/bpm_detection.py)<br>
