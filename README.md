@@ -10,6 +10,12 @@ optional arguments:
   --filename FILENAME  wav file to be analyzed
 ``` 
 
+# Dependencies
+```
+pip install -r requirements.txt
+```
+Requires scipy, numpy, and PyWavelets
+
 # Why?
 Why did I do this? As you may have noticed from the references below, there are already a couple of implementations, even one in Python! While I found these resources helpful in understanding the original [paper](http://soundlab.cs.princeton.edu/publications/2001_amta_aadwt.pdf), I still struggled to understand exactly what parts of the code correllated to what aspects of the paper. What better way to learn than by doing! So here I've re-implemented the algorithm detailed in the paper mostly from scratch, and have annotated as much as I could such that the implementation is as clear as possible. Hopefully you can learn as much as I did, without having to dig through code and text to understand what's going on!
 
